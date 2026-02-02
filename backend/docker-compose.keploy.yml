@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # MongoDB service for testing
+  mongodb:
+    image: mongo:latest
+    container_name: ai-storyforge-mongo-test
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: storyforge_test
+    volumes:
+      - mongo-test-data:/data/db
+    networks:
+      - keploy-network
+
+  # Backend application
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: ai-storyforge-backend
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=test
+      - MONGO_URI=mongodb://mongodb:27017/storyforge_test
+      - JWT_SECRET=${JWT_SECRET}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - HUGGINGFACE_API_TOKEN=${HUGGINGFACE_API_TOKEN}
+      - REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN}
+    volumes:
+      - ./keploy:/app/keploy
+      - ./:/app
+    networks:
+      - keploy-network
+    command: node index.js
+
+  # Keploy service
+  keploy:
+    image: ghcr.io/keploy/keploy:latest
+    container_name: keploy
+    privileged: true
+    pid: "host"
+    volumes:
+      - ./keploy:/keploy
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/kernel/debug:/sys/kernel/debug
+      - /sys/fs/bpf:/sys/fs/bpf
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - keploy-network
+    depends_on:
+      - backend
+      - mongodb
+    environment:
+      - KEPLOY_MODE=record
+    command: ["record", "-c", "docker logs -f ai-storyforge-backend"]
+
+volumes:
+  mongo-test-data:
+
+networks:
+  keploy-network:
+    driver: bridge

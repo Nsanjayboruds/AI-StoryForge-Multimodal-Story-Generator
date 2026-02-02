@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "keploy:record": "keploy record -c 'node index.js'",
+    "keploy:test": "keploy test -c 'node index.js' --delay 10",
+    "keploy:test:coverage": "keploy test -c 'node index.js' --delay 10 --coverage"
   },
   "keywords": [],
   "author": "",

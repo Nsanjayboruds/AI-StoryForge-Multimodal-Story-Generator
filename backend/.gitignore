@@ -14,3 +14,9 @@ logs
 
 # System
 Thumbs.db
+
+# Keploy test data and reports
+keploy/
+coverage/
+*.coverage
+test-results/
