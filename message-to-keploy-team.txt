@@ -1,0 +1,37 @@
+Hi @Achanandhi! 👋
+
+I just implemented Keploy testing in my project **AI-StoryForge** - a multimodal AI-powered story generator! 🎉
+
+**Project:** https://github.com/Nsanjayboruds/AI-StoryForge-Multimodal-Story-Generator
+
+**What I'm testing with Keploy:**
+✅ Node.js/Express REST API
+✅ AI story generation (Groq API with LLaMA models)
+✅ Image generation (HuggingFace Stable Diffusion)
+✅ MongoDB user authentication
+✅ Multiple external API integrations
+
+**Why I chose Keploy:**
+- Zero test code - automatic test generation from API traffic
+- Built-in mocking for external APIs (Groq, HuggingFace, Replicate)
+- MongoDB query recording and replay
+- Perfect for CI/CD pipelines
+
+**Implementation highlights:**
+- Complete keploy.yml configuration
+- Custom test scripts for easy workflow
+- Docker Compose setup for containerized testing
+- Comprehensive documentation
+
+**Setup verification:** All tests passing ✅
+- Keploy 3.3.10 installed and working
+- Server responds successfully
+- Test recording and playback functional
+
+I'd love to add this to the Keploy Adopters list! I've prepared the submission document and can open a PR. 
+
+**Tech Stack:** Node.js, Express, MongoDB, Groq AI, HuggingFace, Replicate
+
+Would be happy to share more details about the implementation or create a blog post/case study if that would help the community!
+
+Let me know if you need any additional information. Thanks for building such an awesome tool! 🚀
