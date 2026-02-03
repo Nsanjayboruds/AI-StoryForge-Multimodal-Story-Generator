@@ -147,6 +147,12 @@ The app will be available at `http://localhost:5173`
 
 ## 🧪 Testing with Keploy
 
+### 📹 Demo: Keploy Recording and Replay
+
+![Keploy Recording and Test Replay Demo](backend/keploy-demo.gif)
+
+*The GIF above shows Keploy in action - automatically recording API traffic and replaying it as tests.*
+
 ### What is Keploy?
 
 Keploy is an automated API testing tool that:
