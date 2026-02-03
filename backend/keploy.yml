@@ -1,104 +1,26 @@
-version: "2.0"
-
 # Keploy Configuration for AI-StoryForge Backend
-name: "ai-storyforge-backend"
-description: "API testing configuration for the AI Story Generator Backend"
+path: "./keploy"
 
-app:
-  # Command to start your application
-  command: "node index.js"
-  
-  # Port on which your application runs
-  port: 5000
-  
-  # Host configuration
-  host: "0.0.0.0"
+# Command to start application (optional, can be passed via CLI)
+command: "node index.js"
+
+# Port on which application runs
+port: 5000
 
 # Test configuration
 test:
-  # Test run settings
-  selectedTests:
-    - "test-set-0"
-    - "test-set-1"
+  # Test sets to run
+  selectedTests: {}
   
   # Global timeout for tests (in seconds)
   globalTimeout: 60
   
-  # Test delay (in seconds) - wait time before starting tests
+  # Test delay (in seconds)
   delay: 5
-
-# Path configuration
-path:
-  # Directory where test cases will be stored
-  testPath: "./keploy/tests"
-  
-  # Directory where mock files will be stored
-  mockPath: "./keploy/mocks"
 
 # Record mode configuration
 record:
   # Filters for recording
   filters:
-    # URLs to exclude from recording
-    urlRegex: ".*localhost:27017.*|.*mongodb.*|.*groq.*|.*huggingface.*|.*replicate.*"
-    
-    # Headers to filter out (sensitive data)
-    headers:
-      - "authorization"
-      - "cookie"
-      - "set-cookie"
-  
-  # Ignore certain request/response parts
-  ignoreOrdering: true
+    urlRegex: ".*localhost:27017.*|.*mongodb.*"
 
-# Proxy settings
-proxy:
-  # Enable/disable proxy
-  enabled: true
-  
-  # Proxy port (different from app port)
-  port: 16789
-
-# Stubs (External API mocking)
-stubs:
-  # MongoDB connection
-  - type: "generic"
-    name: "mongodb"
-    host: "localhost"
-    port: 27017
-    
-  # Groq API
-  - type: "http"
-    name: "groq-api"
-    host: "api.groq.com"
-    port: 443
-    
-  # HuggingFace API
-  - type: "http"
-    name: "huggingface-api"
-    host: "api-inference.huggingface.co"
-    port: 443
-
-# Normalize certain fields in tests
-normalize:
-  # Fields that should be normalized (timestamps, IDs, etc.)
-  headers:
-    - "date"
-    - "x-request-id"
-    - "x-response-time"
-  
-  body:
-    # Normalize dynamic fields in request/response body
-    - "$.timestamp"
-    - "$.usage.prompt_tokens"
-    - "$.usage.completion_tokens"
-    - "$._id"
-    - "$.token"
-
-# Coverage settings
-coverage:
-  enabled: true
-  format: "cobertura"
-  
-# Log level (debug, info, warn, error)
-logLevel: "info"
